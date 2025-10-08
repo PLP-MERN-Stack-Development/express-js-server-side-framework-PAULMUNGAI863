@@ -1,62 +1,168 @@
-# Express.js RESTful API Assignment
+# 🛍️ Express.js Products API
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+## 🚀 Overview
+This project is a **RESTful API** built with **Express.js** that manages a list of products.  
+It includes standard **CRUD operations**, **middleware implementations**, **error handling**, and **advanced features** like filtering, pagination, and search.
 
-## Assignment Overview
+---
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+## 📦 Features
+- **CRUD Operations** for products  
+- **Custom Middleware** for logging, authentication, and validation  
+- **Error Handling** with custom error classes  
+- **Advanced Features:** filtering, pagination, search, and statistics
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
+## ⚙️ Installation & Setup
 
-## Files Included
+### 1️⃣ Clone the repository
+```bash
+git clone <your-repo-url>
+cd <your-repo-folder>
+```
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
 
-## Requirements
+### 3️⃣ Create an `.env` file
+Use the provided `.env.example` as a reference:
+```
+API_KEY=your_secret_key
+```
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+### 4️⃣ Start the server
+```bash
+node server.js
+```
 
-## API Endpoints
+The server runs by default on:
+```
+http://localhost:3000
+```
 
-The API will have the following endpoints:
+---
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+## 📡 API Endpoints
 
-## Submission
+### 🧾 Base URL
+```
+http://localhost:3000/api/products
+```
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+### 🔹 GET /api/products
+Get all products  
+Supports:
+- **Filtering:** `?category=Electronics`
+- **Pagination:** `?page=1&limit=5`
+- **Search:** `?search=phone`
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+Example:
+```
+GET /api/products?category=Electronics&page=2&limit=3
+```
 
-## Resources
+---
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+### 🔹 GET /api/products/:id
+Get a specific product by its ID  
+**Example:** `/api/products/1`
+
+---
+
+### 🔹 POST /api/products
+Create a new product  
+**Headers:**
+```
+x-api-key: your_secret_key
+```
+**Body:**
+```json
+{
+  "name": "Smartphone",
+  "description": "Latest model with high performance",
+  "price": 999.99,
+  "category": "Electronics",
+  "inStock": true
+}
+```
+
+---
+
+### 🔹 PUT /api/products/:id
+Update an existing product  
+**Headers:**
+```
+x-api-key: your_secret_key
+```
+**Body:**
+```json
+{
+  "name": "Updated Phone",
+  "price": 899.99
+}
+```
+
+---
+
+### 🔹 DELETE /api/products/:id
+Delete a product  
+**Headers:**
+```
+x-api-key: your_secret_key
+```
+
+---
+
+### 🔹 GET /api/products/stats
+Get statistics (e.g., count of products by category)
+
+---
+
+## 🧩 Middleware Used
+- **Logger:** Logs HTTP method, URL, and timestamp  
+- **JSON Parser:** Parses JSON bodies  
+- **Authentication:** Verifies API key  
+- **Validation:** Ensures valid product data before saving  
+- **Error Handler:** Handles errors globally with proper status codes  
+
+---
+
+## 🧪 Example Response
+
+**GET /api/products**
+```json
+[
+  {
+    "id": "1",
+    "name": "Smartphone",
+    "description": "Latest model with high performance",
+    "price": 999.99,
+    "category": "Electronics",
+    "inStock": true
+  }
+]
+```
+
+**POST /api/products (Error Example)**
+```json
+{
+  "error": "ValidationError",
+  "message": "Product name is required"
+}
+```
+
+---
+
+## 👨‍💻 Technologies Used
+- Node.js
+- Express.js
+- UUID (for unique product IDs)
+- Body-parser
+- Dotenv
+
+---
+
+
